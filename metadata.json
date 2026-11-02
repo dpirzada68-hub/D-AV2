@@ -1,0 +1,6 @@
+{
+  "name": "D&A Media Hub - Creative Video Production Agency",
+  "description": "Premium contract-based video editing and post-production studio for global creators, brands, and digital agencies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#08090D] text-zinc-300">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&A Media Hub — Creative Video Production & Post-Production Agency</title>
+    <meta name="description" content="Elite contract-based video editing and post-production studio for global creators, brands, and digital agencies. High-retention pacing, DaVinci color grading, and dedicated capacity.">
+    <meta property="og:title" content="D&A Media Hub — Creative Video Production Agency">
+    <meta property="og:description" content="Elite contract-based video editing and post-production studio for global creators, brands, and digital agencies.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Premium Google Fonts: Syne (Editorial Display), Plus Jakarta Sans (Body & UI), JetBrains Mono (Technical Readouts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome 6 for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- GSAP 3 & ScrollTrigger for High-Fidelity Cinematic Motion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis Smooth Momentum Scrolling (Studio Freight) -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            400: '#fb7185',
+                            500: '#e11d48', // Refined Rose / Crimson Accent
+                            600: '#be123c',
+                            700: '#9f1239',
+                        },
+                        studio: {
+                            base: '#08090D',
+                            card: '#0F1117',
+                            surface: '#141721',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            'border-active': 'rgba(225, 29, 72, 0.4)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Reset & Custom Styling */
+        html {
+            scroll-padding-top: 5rem;
+            color-scheme: dark;
+        }
+
+        /* Lenis recommended base styling */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        /* Subtle film grain background effect for cinematic texture */
+        .bg-grain {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* Hairline borders */
+        .hairline-border {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Studio glass backdrop */
+        .studio-glass {
+            background: rgba(12, 14, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* Editorial Navigation Underline Animation */
+        .nav-link {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background: #e11d48;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Clipping mask utility for cinematic typography reveals */
+        .text-mask {
+            overflow: hidden;
+            display: block;
+            padding-bottom: 0.1em;
+            margin-bottom: -0.1em;
+        }
+
+        /* Card top accent highlight line animation on hover */
+        .card-accent-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e11d48, transparent);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .group:hover .card-accent-line {
+            transform: scaleX(1);
+        }
+
+        /* Play button ripple pulse */
+        @keyframes subtle-pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.18); opacity: 0; }
+            100% { transform: scale(0.95); opacity: 0; }
+        }
+        .play-pulse-ring {
+            animation: subtle-pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Scrollbar aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08090D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+
+        /* Reduced motion compliance */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .hero-line, .reveal-item, .hero-fade {
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#08090D] text-zinc-300 font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Studio Announcement Bar -->
+    <aside aria-label="Studio Notice" class="bg-[#0c0e14] border-b border-white/[0.06] text-xs py-2 px-4 text-zinc-400">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-zinc-300 font-medium">Studio Status:</span>
+                <span>Accepting 2 new retainer contracts for this quarter</span>
+            </div>
+            <div class="hidden md:flex items-center gap-4 text-zinc-400 text-[11px] font-mono">
+                <span>EST / GMT / PST Timezone Alignment</span>
+                <span>·</span>
+                <span class="text-zinc-300">Lahore, Pakistan · Global Delivery</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-50 transition-all duration-300 studio-glass border-b border-white/[0.07]" id="site-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Wordmark -->
+                <a href="#home" class="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 rounded-lg p-1">
+                    <div class="w-9 h-9 rounded-md bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-play text-xs ml-0.5 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-extrabold text-xl text-white tracking-wider leading-none">
+                            D&A <span class="text-brand-500">MEDIA</span>
+                        </span>
+                        <span class="text-[9px] uppercase tracking-[0.25em] text-zinc-400 font-mono mt-1">Post-Production</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden lg:flex items-center gap-8" aria-label="Main Navigation">
+                    <a href="#about" class="nav-link text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200 focus-visible:text-white focus-visible:outline-none">About</a>
+                    <a href="#capabilities" class="nav-link text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200 focus-visible:text-white focus-visible:outline-none">Capabilities</a>
+                    <a href="#portfolio" class="nav-link text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200 focus-visible:text-white focus-visible:outline-none">Selected Works</a>
+                    <a href="#methodology" class="nav-link text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200 focus-visible:text-white focus-visible:outline-none">Workflow</a>
+                    <a href="#trust" class="nav-link text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200 focus-visible:text-white focus-visible:outline-none">Trust</a>
+                </nav>
+
+                <!-- Action CTA -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="https://wa.me/923063984702" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition px-3 py-2 border border-white/[0.08] rounded-md hover:border-zinc-700 hover:bg-white/[0.02]">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                        <span>03063984702</span>
+                    </a>
+                    <a href="#contact" class="group relative inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-md bg-white text-black hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-sm active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-1.5">
+                            <span>Inquire Contract</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center gap-3">
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider px-3.5 py-2 rounded-md bg-white text-black hover:bg-brand-500 hover:text-white transition">
+                        Inquire
+                    </a>
+                    <button id="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu" class="w-10 h-10 rounded-md border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/5 transition">
+                        <i class="fa-solid fa-bars text-base transition-transform duration-300" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-nav" class="hidden lg:hidden border-t border-white/[0.08] bg-[#0c0e14] px-4 py-6 space-y-4">
+            <div class="flex flex-col space-y-3 font-display">
+                <a href="#about" class="mobile-link text-base font-semibold text-zinc-300 hover:text-white py-2 border-b border-white/[0.04] transition">About Studio</a>
+                <a href="#capabilities" class="mobile-link text-base font-semibold text-zinc-300 hover:text-white py-2 border-b border-white/[0.04] transition">Capabilities</a>
+                <a href="#portfolio" class="mobile-link text-base font-semibold text-zinc-300 hover:text-white py-2 border-b border-white/[0.04] transition">Selected Works</a>
+                <a href="#methodology" class="mobile-link text-base font-semibold text-zinc-300 hover:text-white py-2 border-b border-white/[0.04] transition">Workflow & Pipeline</a>
+                <a href="#trust" class="mobile-link text-base font-semibold text-zinc-300 hover:text-white py-2 border-b border-white/[0.04] transition">Trust & Client Proof</a>
+                <a href="#contact" class="mobile-link text-base font-bold text-brand-400 py-2 transition">Start an Inquiry</a>
+            </div>
+            <div class="pt-4 border-t border-white/[0.08] flex flex-col gap-2 text-xs font-mono text-zinc-400">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-envelope text-brand-500"></i>
+                    <a href="mailto:dpirzada37@gmail.com" class="hover:text-white">dpirzada37@gmail.com</a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                    <a href="https://wa.me/923063984702" class="hover:text-white">03063984702</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION: Bold, Cinematic Mask-Revealed Typography & Parallax Depth -->
+        <section id="home" class="relative pt-16 pb-24 md:pt-24 md:pb-32 bg-grain overflow-hidden border-b border-white/[0.06]">
+            <!-- Subtle architectural background glow with gentle scroll parallax -->
+            <div id="hero-bg-glow" class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-brand-500/[0.04] blur-[140px] pointer-events-none will-change-transform"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <!-- Editorial Kicker -->
+                <div class="hero-fade flex flex-wrap items-center gap-3 mb-8 text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 opacity-0 transform -translate-y-2">
+                    <span class="text-brand-500 font-bold">D&A Media Hub</span>
+                    <span>·</span>
+                    <span>Post-Production Agency</span>
+                    <span>·</span>
+                    <span class="text-zinc-500">Contract-Based Suites</span>
+                </div>
+
+                <!-- Main Editorial Headline: Cinematic Clipping Mask Reveal & Controlled Parallax -->
+                <div class="max-w-5xl" id="hero-headline-wrap">
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.08] mb-8 select-none">
+                        <!-- Line 1 Masked Reveal -->
+                        <span class="text-mask">
+                            <span class="hero-line block transform translate-y-[110%] opacity-0 will-change-transform will-change-opacity">
+                                PRECISION POST-PRODUCTION.
+                            </span>
+                        </span>
+                        <!-- Line 2 Masked Reveal -->
+                        <span class="text-mask">
+                            <span class="hero-line block text-zinc-400 transform translate-y-[110%] opacity-0 will-change-transform will-change-opacity">
+                                ENGINEERED FOR RETENTION.
+                            </span>
+                        </span>
+                    </h1>
+                    
+                    <p class="hero-fade text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-light mb-10 opacity-0 transform translate-y-4">
+                        We operate as a dedicated, contract-based post-production team for international creators, media networks, and ambitious brands. Fixed monthly capacity, DaVinci Resolve color pipelines, and cinema-grade storytelling — without the headache of freelancer churn.
+                    </p>
+
+                    <!-- CTAs & Micro-trust -->
+                    <div class="hero-fade flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-16 opacity-0 transform translate-y-4">
+                        <a href="#contact" class="group inline-flex items-center justify-center gap-3 text-sm font-semibold px-8 py-4 rounded-md bg-brand-500 hover:bg-brand-600 text-white transition-all duration-300 shadow-lg shadow-brand-500/20 active:scale-98">
+                            <span>Start a Retainer Inquiry</span>
+                            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                        </a>
+                        <a href="#portfolio" class="group inline-flex items-center justify-center gap-3 text-sm font-semibold px-8 py-4 rounded-md bg-zinc-900/90 hover:bg-zinc-800 text-white border border-white/10 transition-all duration-300">
+                            <i class="fa-solid fa-play text-brand-500 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Explore Portfolio</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Editorial NLE Video Showcase (Authentic post-production interface with live clock & meters) -->
+                <div id="nle-showcase" class="rounded-xl border border-white/[0.1] bg-[#0c0e15] shadow-2xl overflow-hidden reveal-item will-change-transform transform translate-y-8 opacity-0">
+                    <!-- NLE Header Bar -->
+                    <div class="bg-[#12151e] px-4 py-3 border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-400">
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                            </div>
+                            <span class="text-zinc-200 font-medium">REEL_SELECT_MASTER_4K.mov</span>
+                            <span class="text-zinc-500 hidden sm:inline">|</span>
+                            <span class="hidden sm:inline text-zinc-400">ProRes 422 HQ</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-[11px]">
+                            <span class="text-brand-400 font-semibold flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                                REC TC
+                            </span>
+                            <!-- Live cycling Studio Timecode Clock -->
+                            <span class="text-zinc-200 font-mono" id="live-timecode">00:01:42:18</span>
+                            <span class="hidden md:inline text-zinc-400">3840×2160 · 23.976 fps</span>
+                        </div>
+                    </div>
+
+                    <!-- Video Preview Stage -->
+                    <div class="relative aspect-video w-full bg-black group" id="hero-player-container">
+                        <!-- Default Poster & Interactive Trigger -->
+                        <div id="hero-player-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-[#090b10] text-center p-6 cursor-pointer overflow-hidden">
+                            <!-- Background overlay image with filmic treatment -->
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1600&q=80" alt="Agency Showreel Studio Preview" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-105 transition duration-700 ease-out">
+                            
+                            <div class="relative z-10 flex flex-col items-center">
+                                <div class="relative flex items-center justify-center mb-4">
+                                    <!-- Expanding pulse ring on hover -->
+                                    <div class="absolute inset-0 rounded-full bg-brand-500/30 play-pulse-ring"></div>
+                                    <button type="button" aria-label="Play D&A Media Hub Agency Master Reel" class="relative w-20 h-20 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-brand-600 transition-all duration-300">
+                                        <i class="fa-solid fa-play text-2xl ml-1 group-hover:scale-110 transition-transform duration-300"></i>
+                                    </button>
+                                </div>
+                                <span class="font-display font-bold text-white text-lg tracking-wide mb-1 group-hover:text-brand-300 transition-colors">Watch Agency Reel</span>
+                                <span class="text-xs font-mono text-zinc-400">Direct Google Drive Stream · 4K UHD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NLE Timeline Tracks Footer with Live Simulated Waveform Audio Meters -->
+                    <div class="bg-[#0f1118] p-4 border-t border-white/[0.08] text-xs font-mono text-zinc-400">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                            <!-- Live Animated Audio VU Meters -->
+                            <div class="flex items-center gap-3">
+                                <span class="text-[10px] text-zinc-400 uppercase">Master L/R</span>
+                                <div class="flex-1 bg-zinc-900 h-2.5 rounded overflow-hidden flex p-0.5 gap-0.5 border border-white/[0.06]">
+                                    <div id="meter-bar-l" class="bg-emerald-500 h-full rounded-sm transition-all duration-150" style="width: 72%;"></div>
+                                    <div id="meter-bar-warn" class="bg-yellow-500 h-full rounded-sm transition-all duration-150" style="width: 14%;"></div>
+                                    <div id="meter-bar-peak" class="bg-red-500 h-full rounded-sm transition-all duration-150" style="width: 6%;"></div>
+                                </div>
+                                <span class="text-[11px] text-zinc-300">-14 LUFS</span>
+                            </div>
+
+                            <!-- Channel Tracks -->
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300 text-[10px] border border-white/[0.04]">V1: Cuts</span>
+                                <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300 text-[10px] border border-white/[0.04]">V2: DaVinci Color</span>
+                                <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300 text-[10px] border border-white/[0.04]">A1: Dialogue</span>
+                                <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300 text-[10px] border border-white/[0.04]">A2: SFX / Score</span>
+                            </div>
+
+                            <!-- Pipeline Tools -->
+                            <div class="flex items-center justify-end gap-3 text-zinc-400">
+                                <span>DaVinci Resolve Studio</span>
+                                <span>·</span>
+                                <span>Premiere Pro</span>
+                                <span>·</span>
+                                <span>After Effects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- STATISTICAL PROOF & CREDIBILITY STRIP: Animated Counters on Scroll -->
+        <section aria-label="Key Performance Metrics" class="py-12 bg-[#0c0e14] border-b border-white/[0.06] overflow-hidden" id="stats-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+                    
+                    <div class="stat-item flex flex-col border-l-2 border-brand-500/40 pl-5 opacity-0 transform translate-y-6">
+                        <span class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-1">
+                            <span class="counter-val" data-target="50">0</span>+
+                        </span>
+                        <span class="text-xs font-mono uppercase tracking-wider text-zinc-400">Global Creator Partnerships</span>
+                        <span class="text-[11px] text-zinc-400 mt-1">Across US, UK, EU & Asia</span>
+                    </div>
+
+                    <div class="stat-item flex flex-col border-l-2 border-brand-500/40 pl-5 opacity-0 transform translate-y-6">
+                        <span class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-1">
+                            <span class="counter-val" data-target="99">0</span>%
+                        </span>
+                        <span class="text-xs font-mono uppercase tracking-wider text-zinc-400">Retainer Client Retention</span>
+                        <span class="text-[11px] text-zinc-400 mt-1">Multi-month ongoing contracts</span>
+                    </div>
+
+                    <div class="stat-item flex flex-col border-l-2 border-brand-500/40 pl-5 opacity-0 transform translate-y-6">
+                        <span class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-1">
+                            <span class="counter-val" data-target="4000" data-format="comma">0</span>+
+                        </span>
+                        <span class="text-xs font-mono uppercase tracking-wider text-zinc-400">Finished Master Exports</span>
+                        <span class="text-[11px] text-zinc-400 mt-1">YouTube, Commercial & Social</span>
+                    </div>
+
+                    <div class="stat-item flex flex-col border-l-2 border-brand-500/40 pl-5 opacity-0 transform translate-y-6">
+                        <span class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-1">&lt; 24h</span>
+                        <span class="text-xs font-mono uppercase tracking-wider text-zinc-400">Producer Turnaround & Sync</span>
+                        <span class="text-[11px] text-zinc-400 mt-1">Dedicated Slack / Frame.io sync</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION: Editorial Studio Breakdown with Staggered Scroll Triggers -->
+        <section id="about" class="py-24 md:py-32 bg-[#08090D] border-b border-white/[0.06] relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                    
+                    <!-- Left: Agency Thesis with Masked Heading -->
+                    <div class="lg:col-span-5 reveal-group">
+                        <div class="text-xs font-mono uppercase tracking-[0.2em] text-brand-500 mb-4 font-semibold reveal-elem opacity-0 transform translate-y-4">
+                            01 · About The Studio
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight leading-tight mb-6 reveal-elem opacity-0 transform translate-y-4">
+                            We don't just cut clips. We build in-house editing infrastructure.
+                        </h2>
+                        <p class="text-zinc-400 text-base leading-relaxed mb-6 font-light reveal-elem opacity-0 transform translate-y-4">
+                            Based in Pakistan and serving creators, production companies, and brands across North America, Europe, and the Middle East, D&A Media Hub operates strictly on a dedicated contract basis.
+                        </p>
+                        <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light reveal-elem opacity-0 transform translate-y-4">
+                            Hiring random freelancers results in inconsistent pacing, color mismatches, and missed publishing deadlines. When you partner with D&A Media Hub, your brand is assigned a permanent lead editor, secondary finisher, and DaVinci colorist.
+                        </p>
+
+                        <!-- Workflow Credentials -->
+                        <div class="p-5 rounded-lg border border-white/[0.08] bg-[#0c0e15] space-y-3 reveal-elem opacity-0 transform translate-y-4">
+                            <div class="text-xs font-mono uppercase tracking-wider text-zinc-400">Production Standards</div>
+                            <div class="grid grid-cols-2 gap-3 text-xs text-zinc-300">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-brand-500"></i>
+                                    <span>DaVinci Resolve Studio 18</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-brand-500"></i>
+                                    <span>Frame.io Timecode Review</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-brand-500"></i>
+                                    <span>Adobe Premiere Pro CC</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-brand-500"></i>
+                                    <span>Broadcast Audio EQ Stems</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Three Strategic Pillars with Staggered Entrance -->
+                    <div class="lg:col-span-7 space-y-6" id="about-pillars">
+                        
+                        <!-- Pillar 1 -->
+                        <div class="pillar-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0d0f17] hover:border-white/[0.18] transition-all duration-300 group opacity-0 transform translate-y-6 overflow-hidden">
+                            <div class="card-accent-line"></div>
+                            <div class="flex items-start gap-5">
+                                <span class="font-mono text-brand-500 text-lg font-bold group-hover:translate-x-1 transition-transform duration-300">01</span>
+                                <div>
+                                    <h3 class="text-xl font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">Cognitive Retention & Pacing Architecture</h3>
+                                    <p class="text-zinc-400 text-sm leading-relaxed">
+                                        Viewer drop-off happens within seconds of stagnation. We engineer visual rhythm through strategic micro-cuts, intentional visual re-engagement cues, dynamic sound layering, and narrative tension that keeps watch time high without resorting to chaotic editing.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2 -->
+                        <div class="pillar-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0d0f17] hover:border-white/[0.18] transition-all duration-300 group opacity-0 transform translate-y-6 overflow-hidden">
+                            <div class="card-accent-line"></div>
+                            <div class="flex items-start gap-5">
+                                <span class="font-mono text-brand-500 text-lg font-bold group-hover:translate-x-1 transition-transform duration-300">02</span>
+                                <div>
+                                    <h3 class="text-xl font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">Guaranteed Capacity Retainer Model</h3>
+                                    <p class="text-zinc-400 text-sm leading-relaxed">
+                                        No hourly billing surprises or disappearing freelancers. Our retainer contracts lock in your studio hours, guaranteed delivery dates, and consistent quality standards every single month. Your pipeline never stalls.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 3 -->
+                        <div class="pillar-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0d0f17] hover:border-white/[0.18] transition-all duration-300 group opacity-0 transform translate-y-6 overflow-hidden">
+                            <div class="card-accent-line"></div>
+                            <div class="flex items-start gap-5">
+                                <span class="font-mono text-brand-500 text-lg font-bold group-hover:translate-x-1 transition-transform duration-300">03</span>
+                                <div>
+                                    <h3 class="text-xl font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">Cinematic Finishing & Color Science</h3>
+                                    <p class="text-zinc-400 text-sm leading-relaxed">
+                                        Every project undergoes a dedicated DaVinci Resolve color-grading pass to balance skin tones, harmonize lighting, and establish a distinct cinematic look tailored to your brand identity.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CAPABILITIES / SERVICES: Interactive Micro-Animations & Dynamic Shimmer -->
+        <section id="capabilities" class="py-24 md:py-32 bg-[#0c0e14] border-b border-white/[0.06] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-group">
+                    <div>
+                        <div class="text-xs font-mono uppercase tracking-[0.2em] text-brand-500 mb-3 font-semibold reveal-elem opacity-0 transform translate-y-4">
+                            02 · Core Capabilities
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight reveal-elem opacity-0 transform translate-y-4">
+                            Post-Production Suite
+                        </h2>
+                    </div>
+                    <p class="text-zinc-400 max-w-md text-sm leading-relaxed reveal-elem opacity-0 transform translate-y-4">
+                        End-to-end post-production delivered through structured workflows, industry-standard color grading, and broadcast-grade audio mastering.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="capabilities-grid">
+                    
+                    <!-- Service 1: YouTube -->
+                    <div class="service-card relative p-8 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group opacity-0 transform translate-y-8 overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-mono text-zinc-400 group-hover:text-brand-400 transition-colors">SERVICE · 01</span>
+                                <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:rotate-6 transition-all duration-300">
+                                    <i class="fa-brands fa-youtube text-lg"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">
+                                YouTube Long-Form
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Narrative pacing, jump cuts, B-roll selection, visual hooks, and graphic packaging engineered to maximize Average Percentage Viewed (APV) and algorithmic distribution.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06]">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">Deliverables</span>
+                            <div class="text-xs text-zinc-400 space-y-1">
+                                <div class="group-hover:translate-x-1 transition-transform duration-200">· 4K Master Export + Clean Thumbnail Frame</div>
+                                <div class="group-hover:translate-x-1 transition-transform duration-300">· Hook Testing Variants & Chapter Splits</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Commercial -->
+                    <div class="service-card relative p-8 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group opacity-0 transform translate-y-8 overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-mono text-zinc-400 group-hover:text-brand-400 transition-colors">SERVICE · 02</span>
+                                <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                                    <i class="fa-solid fa-film text-base"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">
+                                Commercial & Brand Films
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                High-impact visual storytelling with DaVinci Resolve color grading, cinematic transitions, dynamic pacing, and commercial conversion focus for products and agencies.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06]">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">Deliverables</span>
+                            <div class="text-xs text-zinc-400 space-y-1">
+                                <div class="group-hover:translate-x-1 transition-transform duration-200">· 16:9 Broadcast & 9:16 Social Cutdowns</div>
+                                <div class="group-hover:translate-x-1 transition-transform duration-300">· ProRes 422 HQ Archive & Split Audio Stems</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Short-Form -->
+                    <div class="service-card relative p-8 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group opacity-0 transform translate-y-8 overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-mono text-zinc-400 group-hover:text-brand-400 transition-colors">SERVICE · 03</span>
+                                <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:-rotate-6 transition-all duration-300">
+                                    <i class="fa-solid fa-mobile-screen text-base"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">
+                                Short-Form Content Engine
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Fast-paced TikToks, Instagram Reels, and YouTube Shorts featuring kinetic captions, customized brand typography, rhythmic audio sound design, and viral retention hooks.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06]">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">Deliverables</span>
+                            <div class="text-xs text-zinc-400 space-y-1">
+                                <div class="group-hover:translate-x-1 transition-transform duration-200">· High-Density Weekly Batch Delivery</div>
+                                <div class="group-hover:translate-x-1 transition-transform duration-300">· Multi-Platform Formatted Exports</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: VFX & Motion -->
+                    <div class="service-card relative p-8 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group opacity-0 transform translate-y-8 overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-mono text-zinc-400 group-hover:text-brand-400 transition-colors">SERVICE · 04</span>
+                                <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">
+                                VFX & Motion Graphics
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Custom 2D/3D title sequences, kinetic typography, screen UI replacements, rotoscoping, HUD overlays, and clean brand motion assets that elevate production value.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06]">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">Deliverables</span>
+                            <div class="text-xs text-zinc-400 space-y-1">
+                                <div class="group-hover:translate-x-1 transition-transform duration-200">· After Effects & MOGRT Project Templates</div>
+                                <div class="group-hover:translate-x-1 transition-transform duration-300">· Alpha Channel Motion Graphics</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 5: Audio Post-Production -->
+                    <div class="service-card relative p-8 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group opacity-0 transform translate-y-8 overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-mono text-zinc-400 group-hover:text-brand-400 transition-colors">SERVICE · 05</span>
+                                <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:rotate-12 transition-all duration-300">
+                                    <i class="fa-solid fa-headphones text-base"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">
+                                Audio Post & Sound Design
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Dialogue restoration with iZotope RX, vocal EQ, spatial mixing, immersive sound effect layering, and loudness mastering conforming to YouTube and broadcast criteria.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06]">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">Deliverables</span>
+                            <div class="text-xs text-zinc-400 space-y-1">
+                                <div class="group-hover:translate-x-1 transition-transform duration-200">· Normalized Audio (-14 LUFS Web Standard)</div>
+                                <div class="group-hover:translate-x-1 transition-transform duration-300">· Isolated Dialogue, SFX, & Music Stems</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 6: Podcast Multi-cam -->
+                    <div class="service-card relative p-8 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group opacity-0 transform translate-y-8 overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-mono text-zinc-400 group-hover:text-brand-400 transition-colors">SERVICE · 06</span>
+                                <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                                    <i class="fa-solid fa-podcast text-base"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">
+                                Multi-Cam Podcast Post
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Multi-camera live-switched pacing, color-matching across disparate camera angles, room noise elimination, and extraction of high-performing vertical micro-clips.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06]">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">Deliverables</span>
+                            <div class="text-xs text-zinc-400 space-y-1">
+                                <div class="group-hover:translate-x-1 transition-transform duration-200">· Full-Length Master Episode</div>
+                                <div class="group-hover:translate-x-1 transition-transform duration-300">· 5–8 Vertical Social Cutdowns per Episode</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PORTFOLIO / SELECTED WORKS: Film-Editing Motion, Aperture Reveals & Video Streaming -->
+        <section id="portfolio" class="py-24 md:py-32 bg-[#08090D] border-b border-white/[0.06] relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal-group">
+                    <div>
+                        <div class="text-xs font-mono uppercase tracking-[0.2em] text-brand-500 mb-3 font-semibold reveal-elem opacity-0 transform translate-y-4">
+                            03 · Selected Works
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight reveal-elem opacity-0 transform translate-y-4">
+                            Tested in Production
+                        </h2>
+                    </div>
+                    <p class="text-zinc-400 max-w-md text-sm leading-relaxed reveal-elem opacity-0 transform translate-y-4">
+                        Click any reel to stream the authentic client deliverable directly. All videos preserve their original master color grade, sound mix, and retention editing.
+                    </p>
+                </div>
+
+                <!-- Interactive Filter Tabs -->
+                <div class="flex flex-wrap items-center gap-2 mb-10 p-1.5 rounded-lg border border-white/[0.08] bg-[#0c0e14] w-fit shadow-lg" role="tablist" aria-label="Portfolio Category Filter" id="portfolio-tabs">
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-md text-xs font-semibold tracking-wide transition-all duration-300 bg-white text-black shadow-sm" data-filter="all">
+                        All Projects (4)
+                    </button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-md text-xs font-semibold tracking-wide transition-all duration-300 text-zinc-400 hover:text-white" data-filter="youtube">
+                        YouTube & Retention
+                    </button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-md text-xs font-semibold tracking-wide transition-all duration-300 text-zinc-400 hover:text-white" data-filter="commercial">
+                        Commercial & Brand
+                    </button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-md text-xs font-semibold tracking-wide transition-all duration-300 text-zinc-400 hover:text-white" data-filter="ecommerce">
+                        E-Commerce Agency
+                    </button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-md text-xs font-semibold tracking-wide transition-all duration-300 text-zinc-400 hover:text-white" data-filter="entertainment">
+                        Entertainment
+                    </button>
+                </div>
+
+                <!-- Project Grid with Film Shutter Entrance -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="portfolio-grid">
+                    
+                    <!-- PROJECT 01: Tech & Finance Creator (ID: 13Ao5Nr2mXBVGAFlROuJzsGDuvTR6-ilD) -->
+                    <article class="portfolio-item relative rounded-xl border border-white/[0.08] bg-[#0c0e14] overflow-hidden hover:border-brand-500/40 transition-all duration-500 opacity-0 transform translate-y-10 group" data-category="youtube">
+                        <div class="card-accent-line"></div>
+                        <!-- Video Container -->
+                        <div class="aspect-video w-full bg-black relative gdrive-video-wrapper overflow-hidden" 
+                             data-video-id="13Ao5Nr2mXBVGAFlROuJzsGDuvTR6-ilD"
+                             data-title="Tech & Finance Channel Retention Master">
+                            
+                            <!-- Static Preview Card with Cinematic Hover Zoom & Play Trigger -->
+                            <div class="video-poster absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black flex flex-col items-center justify-center p-6 text-center cursor-pointer overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80" alt="Tech & Finance Video Post-Production Thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700 ease-out">
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="relative flex items-center justify-center mb-3">
+                                        <div class="absolute inset-0 rounded-full bg-brand-500/30 play-pulse-ring"></div>
+                                        <div class="w-16 h-16 rounded-full bg-brand-500/90 text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-500 transition-all duration-300 shadow-xl">
+                                            <i class="fa-solid fa-play text-xl ml-1 group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono uppercase tracking-wider text-zinc-300 bg-black/60 px-3 py-1 rounded backdrop-blur-sm group-hover:bg-brand-500/80 group-hover:text-white transition-colors duration-300">Click to Stream Video</span>
+                                </div>
+                                <div class="absolute bottom-3 right-3 text-[11px] font-mono text-zinc-400 bg-black/70 px-2 py-0.5 rounded backdrop-blur-sm border border-white/[0.06]">
+                                    4K UHD · 23.976 fps
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Metadata -->
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+                                <span class="text-brand-400 font-semibold uppercase tracking-wider">YouTube & Retention</span>
+                                <span>Project · 01</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-display font-bold text-white mb-3 group-hover:text-brand-300 transition-colors">
+                                "They 10x'd my channel retention."
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Fast-paced narrative pacing, financial data graphics, dynamic zoom transitions, and strategic sound effects engineered for audience retention.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/[0.06] text-xs">
+                                <div class="flex items-center gap-2 text-zinc-400 font-mono">
+                                    <i class="fa-solid fa-user-check text-brand-500"></i>
+                                    <span>Tech & Finance Creator (Global)</span>
+                                </div>
+                                <button type="button" class="open-cinema-modal group/btn text-zinc-300 hover:text-white font-medium inline-flex items-center gap-1.5 focus-visible:outline-none transition-colors" data-video-id="13Ao5Nr2mXBVGAFlROuJzsGDuvTR6-ilD" data-title="Tech & Finance Retention Master">
+                                    <span>Fullscreen Player</span>
+                                    <i class="fa-solid fa-up-right-from-square text-[10px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- PROJECT 02: Lifestyle Brand (ID: 1By-_YiZG5P6UNaZ8q4nBOkeA0cP-U5Q0) -->
+                    <article class="portfolio-item relative rounded-xl border border-white/[0.08] bg-[#0c0e14] overflow-hidden hover:border-brand-500/40 transition-all duration-500 opacity-0 transform translate-y-10 group" data-category="commercial">
+                        <div class="card-accent-line"></div>
+                        <div class="aspect-video w-full bg-black relative gdrive-video-wrapper overflow-hidden" 
+                             data-video-id="1By-_YiZG5P6UNaZ8q4nBOkeA0cP-U5Q0"
+                             data-title="Cinematic Commercial Lifestyle Film">
+                            
+                            <div class="video-poster absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black flex flex-col items-center justify-center p-6 text-center cursor-pointer overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80" alt="Cinematic Commercial Thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700 ease-out">
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="relative flex items-center justify-center mb-3">
+                                        <div class="absolute inset-0 rounded-full bg-brand-500/30 play-pulse-ring"></div>
+                                        <div class="w-16 h-16 rounded-full bg-brand-500/90 text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-500 transition-all duration-300 shadow-xl">
+                                            <i class="fa-solid fa-play text-xl ml-1 group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono uppercase tracking-wider text-zinc-300 bg-black/60 px-3 py-1 rounded backdrop-blur-sm group-hover:bg-brand-500/80 group-hover:text-white transition-colors duration-300">Click to Stream Video</span>
+                                </div>
+                                <div class="absolute bottom-3 right-3 text-[11px] font-mono text-zinc-400 bg-black/70 px-2 py-0.5 rounded backdrop-blur-sm border border-white/[0.06]">
+                                    DaVinci Color · 4K
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+                                <span class="text-brand-400 font-semibold uppercase tracking-wider">Commercial & Brand</span>
+                                <span>Project · 02</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-display font-bold text-white mb-3 group-hover:text-brand-300 transition-colors">
+                                "Cinematic quality, every single time."
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Cinematic commercial grading, rhythmic audio mixing, and seamless multi-aspect exports crafted for high-end lifestyle brand storytelling.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/[0.06] text-xs">
+                                <div class="flex items-center gap-2 text-zinc-400 font-mono">
+                                    <i class="fa-solid fa-user-check text-brand-500"></i>
+                                    <span>Lifestyle Brand Studio</span>
+                                </div>
+                                <button type="button" class="open-cinema-modal group/btn text-zinc-300 hover:text-white font-medium inline-flex items-center gap-1.5 focus-visible:outline-none transition-colors" data-video-id="1By-_YiZG5P6UNaZ8q4nBOkeA0cP-U5Q0" data-title="Cinematic Commercial Lifestyle Film">
+                                    <span>Fullscreen Player</span>
+                                    <i class="fa-solid fa-up-right-from-square text-[10px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- PROJECT 03: E-commerce Agency (ID: 17dwiznk1JgBdT7rlkjITRo_OVmO7jwq2) -->
+                    <article class="portfolio-item relative rounded-xl border border-white/[0.08] bg-[#0c0e14] overflow-hidden hover:border-brand-500/40 transition-all duration-500 opacity-0 transform translate-y-10 group" data-category="ecommerce">
+                        <div class="card-accent-line"></div>
+                        <div class="aspect-video w-full bg-black relative gdrive-video-wrapper overflow-hidden" 
+                             data-video-id="17dwiznk1JgBdT7rlkjITRo_OVmO7jwq2"
+                             data-title="High-Converting E-Commerce Agency Campaign">
+                            
+                            <div class="video-poster absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black flex flex-col items-center justify-center p-6 text-center cursor-pointer overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="E-Commerce Performance Campaign Thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700 ease-out">
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="relative flex items-center justify-center mb-3">
+                                        <div class="absolute inset-0 rounded-full bg-brand-500/30 play-pulse-ring"></div>
+                                        <div class="w-16 h-16 rounded-full bg-brand-500/90 text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-500 transition-all duration-300 shadow-xl">
+                                            <i class="fa-solid fa-play text-xl ml-1 group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono uppercase tracking-wider text-zinc-300 bg-black/60 px-3 py-1 rounded backdrop-blur-sm group-hover:bg-brand-500/80 group-hover:text-white transition-colors duration-300">Click to Stream Video</span>
+                                </div>
+                                <div class="absolute bottom-3 right-3 text-[11px] font-mono text-zinc-400 bg-black/70 px-2 py-0.5 rounded backdrop-blur-sm border border-white/[0.06]">
+                                    Performance Creative
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+                                <span class="text-brand-400 font-semibold uppercase tracking-wider">E-Commerce Agency</span>
+                                <span>Project · 03</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-display font-bold text-white mb-3 group-hover:text-brand-300 transition-colors">
+                                "The most reliable contract agency."
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                Fast-paced social product hooks, motion graphics overlays, callout animations, and sound design tailored for paid ads and organic virality.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/[0.06] text-xs">
+                                <div class="flex items-center gap-2 text-zinc-400 font-mono">
+                                    <i class="fa-solid fa-user-check text-brand-500"></i>
+                                    <span>E-Commerce Growth Agency</span>
+                                </div>
+                                <button type="button" class="open-cinema-modal group/btn text-zinc-300 hover:text-white font-medium inline-flex items-center gap-1.5 focus-visible:outline-none transition-colors" data-video-id="17dwiznk1JgBdT7rlkjITRo_OVmO7jwq2" data-title="High-Converting E-Commerce Agency Campaign">
+                                    <span>Fullscreen Player</span>
+                                    <i class="fa-solid fa-up-right-from-square text-[10px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- PROJECT 04: Entertainment Channel (ID: 1yp-M0NYFGALC9QHdqv9bsd5gbAeuMAP9) -->
+                    <article class="portfolio-item relative rounded-xl border border-white/[0.08] bg-[#0c0e14] overflow-hidden hover:border-brand-500/40 transition-all duration-500 opacity-0 transform translate-y-10 group" data-category="entertainment">
+                        <div class="card-accent-line"></div>
+                        <div class="aspect-video w-full bg-black relative gdrive-video-wrapper overflow-hidden" 
+                             data-video-id="1yp-M0NYFGALC9QHdqv9bsd5gbAeuMAP9"
+                             data-title="Creator Entertainment Narrative Video">
+                            
+                            <div class="video-poster absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black flex flex-col items-center justify-center p-6 text-center cursor-pointer overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80" alt="Entertainment Channel Video Thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700 ease-out">
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="relative flex items-center justify-center mb-3">
+                                        <div class="absolute inset-0 rounded-full bg-brand-500/30 play-pulse-ring"></div>
+                                        <div class="w-16 h-16 rounded-full bg-brand-500/90 text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-500 transition-all duration-300 shadow-xl">
+                                            <i class="fa-solid fa-play text-xl ml-1 group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono uppercase tracking-wider text-zinc-300 bg-black/60 px-3 py-1 rounded backdrop-blur-sm group-hover:bg-brand-500/80 group-hover:text-white transition-colors duration-300">Click to Stream Video</span>
+                                </div>
+                                <div class="absolute bottom-3 right-3 text-[11px] font-mono text-zinc-400 bg-black/70 px-2 py-0.5 rounded backdrop-blur-sm border border-white/[0.06]">
+                                    Entertainment Edit
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+                                <span class="text-brand-400 font-semibold uppercase tracking-wider">Entertainment</span>
+                                <span>Project · 04</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-display font-bold text-white mb-3 group-hover:text-brand-300 transition-colors">
+                                "Visually stunning and highly engaging."
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-light">
+                                High-energy storytelling, punch-ins, sound design layers, and dynamic captioning crafted to hold viewers to the final second.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/[0.06] text-xs">
+                                <div class="flex items-center gap-2 text-zinc-400 font-mono">
+                                    <i class="fa-solid fa-user-check text-brand-500"></i>
+                                    <span>Entertainment Media Channel</span>
+                                </div>
+                                <button type="button" class="open-cinema-modal group/btn text-zinc-300 hover:text-white font-medium inline-flex items-center gap-1.5 focus-visible:outline-none transition-colors" data-video-id="1yp-M0NYFGALC9QHdqv9bsd5gbAeuMAP9" data-title="Creator Entertainment Narrative Video">
+                                    <span>Fullscreen Player</span>
+                                    <i class="fa-solid fa-up-right-from-square text-[10px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- METHODOLOGY / WORKFLOW: Sequential Pipeline Reveal -->
+        <section id="methodology" class="py-24 md:py-32 bg-[#0c0e14] border-b border-white/[0.06] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="max-w-3xl mb-16 reveal-group">
+                    <div class="text-xs font-mono uppercase tracking-[0.2em] text-brand-500 mb-3 font-semibold reveal-elem opacity-0 transform translate-y-4">
+                        04 · Studio Workflow
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight mb-4 reveal-elem opacity-0 transform translate-y-4">
+                        A battle-tested post-production pipeline
+                    </h2>
+                    <p class="text-zinc-400 text-base leading-relaxed font-light reveal-elem opacity-0 transform translate-y-4">
+                        Every retainer partnership runs on a synchronized post-production pipeline. No missed deadlines, no lost files, and clear milestones at every stage.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="workflow-grid">
+                    
+                    <!-- Step 1 -->
+                    <div class="workflow-card relative p-6 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-8 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <span class="text-xs font-mono text-brand-500 font-bold block mb-4 group-hover:translate-x-1 transition-transform">STAGE · 01</span>
+                            <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">Ingestion & Sync</h3>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light mb-4">
+                                Raw footage is ingested, backed up, multi-camera audio is time-aligned, and transcriptions are generated within 24 hours of upload.
+                            </p>
+                        </div>
+                        <div class="text-[11px] font-mono text-zinc-400 pt-3 border-t border-white/[0.06]">
+                            Tools: Google Drive / LucidLink
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="workflow-card relative p-6 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-8 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <span class="text-xs font-mono text-brand-500 font-bold block mb-4 group-hover:translate-x-1 transition-transform">STAGE · 02</span>
+                            <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">The Assembly Cut</h3>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light mb-4">
+                                Story architecture pass: eliminating dead air, structuring the opening hook, and setting the narrative cadence for optimal viewer retention.
+                            </p>
+                        </div>
+                        <div class="text-[11px] font-mono text-zinc-400 pt-3 border-t border-white/[0.06]">
+                            Tools: Premiere Pro / Resolve
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="workflow-card relative p-6 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-8 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <span class="text-xs font-mono text-brand-500 font-bold block mb-4 group-hover:translate-x-1 transition-transform">STAGE · 03</span>
+                            <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">Finishing & Polish</h3>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light mb-4">
+                                DaVinci Resolve color grading, multi-track audio leveling, Foley sound design, motion graphics overlays, and kinetic typography.
+                            </p>
+                        </div>
+                        <div class="text-[11px] font-mono text-zinc-400 pt-3 border-t border-white/[0.06]">
+                            Tools: DaVinci Resolve & After Effects
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="workflow-card relative p-6 rounded-xl border border-white/[0.08] bg-[#08090D] hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-8 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <span class="text-xs font-mono text-brand-500 font-bold block mb-4 group-hover:translate-x-1 transition-transform">STAGE · 04</span>
+                            <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">Review & Delivery</h3>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light mb-4">
+                                Exact frame-accurate feedback rounds via Frame.io, followed by 4K ProRes archival masters and web-optimized deliverables.
+                            </p>
+                        </div>
+                        <div class="text-[11px] font-mono text-zinc-400 pt-3 border-t border-white/[0.06]">
+                            Tools: Frame.io Timecode Review
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TRUST & CREDIBILITY SECTION -->
+        <section id="trust" class="py-24 md:py-32 bg-[#08090D] border-b border-white/[0.06] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="max-w-3xl mb-16 reveal-group">
+                    <div class="text-xs font-mono uppercase tracking-[0.2em] text-brand-500 mb-3 font-semibold reveal-elem opacity-0 transform translate-y-4">
+                        05 · Trust & Endorsements
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight mb-4 reveal-elem opacity-0 transform translate-y-4">
+                        Why Creators & Brands Retain Us
+                    </h2>
+                    <p class="text-zinc-400 text-base leading-relaxed font-light reveal-elem opacity-0 transform translate-y-4">
+                        Authentic feedback from partners who rely on D&A Media Hub for their regular publishing cycles.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="trust-grid">
+                    
+                    <div class="trust-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0c0e14] hover:border-white/[0.18] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-6 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex text-brand-500 text-xs gap-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <blockquote class="text-white font-display font-semibold text-lg leading-snug mb-4 group-hover:text-brand-300 transition-colors">
+                                "They 10x'd my channel retention."
+                            </blockquote>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light">
+                                "The pacing and cutdowns immediately changed our watch time curves. Our videos hold viewers well beyond the 60% mark."
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06] mt-6">
+                            <span class="text-xs font-medium text-white block">Tech & Finance Creator</span>
+                            <span class="text-[11px] font-mono text-zinc-400">YouTube Partner · Retainer Client</span>
+                        </div>
+                    </div>
+
+                    <div class="trust-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0c0e14] hover:border-white/[0.18] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-6 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex text-brand-500 text-xs gap-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <blockquote class="text-white font-display font-semibold text-lg leading-snug mb-4 group-hover:text-brand-300 transition-colors">
+                                "Cinematic quality, every single time."
+                            </blockquote>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light">
+                                "Flawless color grading in DaVinci. Every project matches our luxury brand guidelines without endless revisions."
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06] mt-6">
+                            <span class="text-xs font-medium text-white block">Lifestyle Brand</span>
+                            <span class="text-[11px] font-mono text-zinc-400">Commercial Brand Client</span>
+                        </div>
+                    </div>
+
+                    <div class="trust-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0c0e14] hover:border-white/[0.18] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-6 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex text-brand-500 text-xs gap-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <blockquote class="text-white font-display font-semibold text-lg leading-snug mb-4 group-hover:text-brand-300 transition-colors">
+                                "The most reliable contract agency."
+                            </blockquote>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light">
+                                "They hit every deadline on the dot. As an e-commerce agency running weekly creatives, that predictability is worth everything."
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06] mt-6">
+                            <span class="text-xs font-medium text-white block">E-commerce Agency</span>
+                            <span class="text-[11px] font-mono text-zinc-400">Performance Creative Partner</span>
+                        </div>
+                    </div>
+
+                    <div class="trust-card relative p-8 rounded-xl border border-white/[0.08] bg-[#0c0e14] hover:border-white/[0.18] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between opacity-0 transform translate-y-6 group overflow-hidden">
+                        <div class="card-accent-line"></div>
+                        <div>
+                            <div class="flex text-brand-500 text-xs gap-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <blockquote class="text-white font-display font-semibold text-lg leading-snug mb-4 group-hover:text-brand-300 transition-colors">
+                                "Visually stunning and highly engaging."
+                            </blockquote>
+                            <p class="text-zinc-400 text-xs leading-relaxed font-light">
+                                "Sound effects, kinetic captions, and comic timing are spot-on. They truly understand what makes modern digital video work."
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-white/[0.06] mt-6">
+                            <span class="text-xs font-medium text-white block">Entertainment Channel</span>
+                            <span class="text-[11px] font-mono text-zinc-400">Creator Media Channel</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT / INQUIRY SECTION: PRESERVING GOOGLE FORMS INTEGRATION -->
+        <section id="contact" class="py-24 md:py-32 bg-[#0c0e14] relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="rounded-2xl border border-white/[0.08] bg-[#08090D] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl reveal-group" id="contact-wrapper">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative z-10">
+                        
+                        <!-- Left: Inquiry Details & Direct Access -->
+                        <div class="lg:col-span-5 reveal-elem opacity-0 transform translate-y-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-mono mb-6">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+                                Retainer Capacity: 2 Suites Available
+                            </div>
+                            
+                            <h2 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight mb-6">
+                                Start Your Retainer Partnership
+                            </h2>
+                            
+                            <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">
+                                Tell us about your channel, brand, or agency deliverables. Our lead post-production producer will review your requirements and respond within 24 hours with availability and capacity options.
+                            </p>
+
+                            <!-- Direct Channels -->
+                            <div class="space-y-4 pt-4 border-t border-white/[0.06]">
+                                
+                                <a href="mailto:dpirzada37@gmail.com" class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06] bg-[#0f1118] hover:border-brand-500/40 hover:bg-[#131722] transition-all duration-300 group">
+                                    <div class="w-10 h-10 rounded-md bg-brand-500/10 text-brand-500 flex items-center justify-center text-base group-hover:bg-brand-500 group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                                        <i class="fa-regular fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block">Direct Producer Email</span>
+                                        <span class="text-white text-sm font-medium group-hover:text-brand-300 transition-colors">dpirzada37@gmail.com</span>
+                                    </div>
+                                </a>
+
+                                <a href="https://wa.me/923063984702" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06] bg-[#0f1118] hover:border-emerald-500/40 hover:bg-[#131722] transition-all duration-300 group">
+                                    <div class="w-10 h-10 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-base group-hover:bg-emerald-500 group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block">WhatsApp Direct Sync</span>
+                                        <span class="text-white text-sm font-medium group-hover:text-emerald-300 transition-colors">03063984702 (+92 306 3984702)</span>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div class="mt-8 pt-6 border-t border-white/[0.06] text-xs font-mono text-zinc-400 space-y-1">
+                                <div>· Non-Disclosure Agreements (NDA) available upon request</div>
+                                <div>· Frame.io collaboration seats included with retainers</div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Custom Styled Google Form -->
+                        <div class="lg:col-span-7 bg-[#0d0f17] p-8 sm:p-10 rounded-xl border border-white/[0.08] reveal-elem opacity-0 transform translate-y-4">
+                            <h3 class="text-xl font-display font-bold text-white mb-2">Project Application</h3>
+                            <p class="text-zinc-400 text-xs mb-8">All fields are forwarded directly to our studio production desk.</p>
+                            
+                            <!-- Hidden iframe to prevent page reload on Google Forms POST -->
+                            <script>var gformSubmitted = false;</script>
+                            <iframe name="hidden_gform_iframe" id="hidden_gform_iframe" style="display:none;" onload="if(gformSubmitted) { document.getElementById('gform-success-container').classList.remove('hidden'); document.getElementById('agency-gform').classList.add('hidden'); }"></iframe>
+
+                            <!-- Exact Google Form Action & Preserved Field Names -->
+                            <form id="agency-gform" 
+                                  action="https://docs.google.com/forms/d/e/1FAIpQLScW-O3HRfpmh_qizc0coeFHONbIpCfq3hd3oBFzPlrRnDt5Mg/formResponse" 
+                                  method="POST" 
+                                  target="hidden_gform_iframe" 
+                                  onsubmit="gformSubmitted = true; document.getElementById('submit-spinner').classList.remove('hidden'); document.getElementById('submit-label').textContent = 'Transmitting...';" 
+                                  class="space-y-6">
+                                
+                                <!-- Field 1: Name / Brand (entry.1264569155) -->
+                                <div>
+                                    <label for="form-name" class="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-2">
+                                        Your Name or Brand <span class="text-brand-500">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           id="form-name"
+                                           name="entry.1264569155" 
+                                           required 
+                                           placeholder="e.g. Marcus Vance / Horizon Media" 
+                                           class="w-full bg-[#121520] border border-white/[0.08] rounded-md px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition duration-200">
+                                </div>
+
+                                <!-- Field 2: Email (entry.1106146705) -->
+                                <div>
+                                    <label for="form-email" class="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-2">
+                                        Email Address <span class="text-brand-500">*</span>
+                                    </label>
+                                    <input type="email" 
+                                           id="form-email"
+                                           name="entry.1106146705" 
+                                           required 
+                                           placeholder="producer@example.com" 
+                                           class="w-full bg-[#121520] border border-white/[0.08] rounded-md px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition duration-200">
+                                </div>
+
+                                <!-- Field 3: Project Details (entry.1442646721) -->
+                                <div>
+                                    <label for="form-message" class="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-2">
+                                        Project Scope & Requirements
+                                    </label>
+                                    <textarea id="form-message"
+                                              name="entry.1442646721" 
+                                              rows="4" 
+                                              placeholder="Tell us about your upload cadence, raw footage format, current retention challenges, or requested services..." 
+                                              class="w-full bg-[#121520] border border-white/[0.08] rounded-md px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition duration-200 resize-none"></textarea>
+                                </div>
+
+                                <!-- Submit Button with Magnetic Feedback -->
+                                <button type="submit" 
+                                        id="form-submit-btn" 
+                                        class="group relative w-full py-4 rounded-md bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-3 shadow-lg shadow-brand-500/25 active:scale-98 overflow-hidden">
+                                    <span id="submit-label" class="relative z-10">Submit Application</span>
+                                    <i class="fa-solid fa-paper-plane text-xs relative z-10 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+                                    <span id="submit-spinner" class="hidden animate-spin ml-2">
+                                        <i class="fa-solid fa-circle-notch"></i>
+                                    </span>
+                                </button>
+                                
+                                <p class="text-[11px] text-zinc-500 text-center font-mono">
+                                    Direct transmission to D&A Media Hub Production Management
+                                </p>
+                            </form>
+
+                            <!-- Success Confirmation State (Shows automatically via hidden iframe onload) -->
+                            <div id="gform-success-container" class="hidden py-12 text-center flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-2xl mb-4 animate-bounce">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <h4 class="text-2xl font-display font-bold text-white mb-2">Inquiry Transmitted</h4>
+                                <p class="text-zinc-400 text-sm max-w-sm mb-6 font-light">
+                                    Thank you. Your project brief has been received. Our lead producer will review your specifications and contact you via email within 24 hours.
+                                </p>
+                                <button type="button" onclick="document.getElementById('agency-gform').reset(); document.getElementById('agency-gform').classList.remove('hidden'); document.getElementById('gform-success-container').classList.add('hidden'); gformSubmitted=false;" class="text-xs font-mono text-brand-400 hover:text-brand-300 underline underline-offset-4 transition">
+                                    Send Another Brief
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FULLSCREEN CINEMA MODAL (For distraction-free client video review) -->
+    <div id="cinema-modal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl hidden flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="cinema-title">
+        <div id="cinema-modal-box" class="relative w-full max-w-5xl bg-[#0b0d14] rounded-xl border border-white/10 shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="bg-[#121520] px-5 py-3.5 border-b border-white/[0.08] flex items-center justify-between text-xs font-mono text-zinc-400">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
+                    <span class="text-white font-medium text-sm" id="cinema-title">Master Reel Preview</span>
+                </div>
+                <button type="button" id="close-cinema-modal" aria-label="Close video player" class="w-8 h-8 rounded-md bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center transition-all duration-200 focus-visible:outline-none">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Iframe Container -->
+            <div class="aspect-video w-full bg-black relative" id="cinema-iframe-slot">
+                <!-- Iframe injected via JS on open, removed on close to kill playback audio -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-5 py-3 bg-[#0a0c12] border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-zinc-400">
+                <span>D&A Media Hub · Production Player</span>
+                <span>Press ESC to exit</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MINIMALIST EDITORIAL FOOTER -->
+    <footer class="bg-[#050608] border-t border-white/[0.06] py-16 text-zinc-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/[0.06]">
+                
+                <!-- Brand Lockup -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 rounded bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500">
+                            <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-xl text-white tracking-wider">
+                            D&A <span class="text-brand-500">MEDIA HUB</span>
+                        </span>
+                    </div>
+                    <p class="text-zinc-400 text-xs leading-relaxed max-w-sm font-light">
+                        Specialized contract-based post-production studio for high-growth YouTube creators, digital agencies, and global brands. Engineered for retention and narrative impact.
+                    </p>
+                    <div class="text-[11px] font-mono text-zinc-400">
+                        Operating from Lahore, Pakistan · Serving Clients Globally
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <div class="text-xs font-mono uppercase tracking-wider text-zinc-300 font-semibold">Studio</div>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#about" class="hover:text-white transition-colors duration-200">About Methodology</a></li>
+                        <li><a href="#capabilities" class="hover:text-white transition-colors duration-200">Editing Arsenal</a></li>
+                        <li><a href="#portfolio" class="hover:text-white transition-colors duration-200">Selected Works</a></li>
+                        <li><a href="#methodology" class="hover:text-white transition-colors duration-200">Pipeline & Workflow</a></li>
+                        <li><a href="#trust" class="hover:text-white transition-colors duration-200">Client Proof</a></li>
+                    </ul>
+                </div>
+
+                <!-- Direct Inquiries -->
+                <div class="md:col-span-4 space-y-3">
+                    <div class="text-xs font-mono uppercase tracking-wider text-zinc-300 font-semibold">Direct Desk</div>
+                    <div class="space-y-2 text-xs">
+                        <div>
+                            <span class="text-zinc-400 block font-mono text-[10px]">INQUIRIES</span>
+                            <a href="mailto:dpirzada37@gmail.com" class="text-zinc-300 hover:text-brand-400 transition font-mono">dpirzada37@gmail.com</a>
+                        </div>
+                        <div>
+                            <span class="text-zinc-400 block font-mono text-[10px]">WHATSAPP DESK</span>
+                            <a href="https://wa.me/923063984702" target="_blank" rel="noopener noreferrer" class="text-zinc-300 hover:text-emerald-400 transition font-mono">03063984702</a>
+                        </div>
+                        <div>
+                            <span class="text-zinc-400 block font-mono text-[10px]">FRAMEWORK</span>
+                            <span class="text-zinc-400">Fixed Monthly Retainers & SLA Contracts</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Colophon -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-zinc-400">
+                <div>
+                    &copy; 2026 D&A Media Hub. All rights reserved.
+                </div>
+                <div class="flex items-center gap-4">
+                    <span>Precision Post-Production</span>
+                    <span>·</span>
+                    <span>Cinema-Grade Finishing</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- MOTION ENGINE: GSAP 3 + ScrollTrigger + Lenis Integration -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Check reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // 1. Initialize Lenis Smooth Scroll (if not reduced motion)
+            let lenis = null;
+            if (!prefersReducedMotion && typeof Lenis !== 'undefined') {
+                lenis = new Lenis({
+                    duration: 1.15,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    direction: 'vertical',
+                    smooth: true,
+                    smoothTouch: false,
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+
+                // Synchronize GSAP ScrollTrigger with Lenis
+                if (typeof ScrollTrigger !== 'undefined') {
+                    lenis.on('scroll', ScrollTrigger.update);
+                    gsap.ticker.add((time) => {
+                        lenis.raf(time * 1000);
+                    });
+                    gsap.ticker.lagSmoothing(0);
+                }
+            }
+
+            // 2. Register GSAP Plugins
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                if (!prefersReducedMotion) {
+                    // --- HERO ANIMATION SEQUENCE ---
+                    // Main 2-line mask-reveal with subtle cubic bezier
+                    const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+                    heroTl.to('.hero-fade', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.9,
+                        stagger: 0.12,
+                        delay: 0.1
+                    })
+                    .to('.hero-line', {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1.25,
+                        stagger: 0.18,
+                        ease: 'power3.out'
+                    }, '-=0.6')
+                    .to('#nle-showcase', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.1,
+                        ease: 'power3.out'
+                    }, '-=0.8');
+
+                    // Subtle Hero Parallax on Scroll
+                    gsap.to('#hero-headline-wrap', {
+                        yPercent: -12,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: '#home',
+                            start: 'top top',
+                            end: 'bottom top',
+                            scrub: 0.6
+                        }
+                    });
+
+                    gsap.to('#hero-bg-glow', {
+                        yPercent: 20,
+                        scale: 1.1,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: '#home',
+                            start: 'top top',
+                            end: 'bottom top',
+                            scrub: 1
+                        }
+                    });
+
+                    // --- SECTION HEADINGS & REVEAL GROUPS ---
+                    gsap.utils.toArray('.reveal-group').forEach(group => {
+                        const items = group.querySelectorAll('.reveal-elem');
+                        if (items.length) {
+                            gsap.to(items, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.85,
+                                stagger: 0.14,
+                                ease: 'power3.out',
+                                scrollTrigger: {
+                                    trigger: group,
+                                    start: 'top 85%',
+                                    toggleActions: 'play none none none'
+                                }
+                            });
+                        }
+                    });
+
+                    // --- STATS NUMERICAL COUNTER ANIMATION ---
+                    ScrollTrigger.create({
+                        trigger: '#stats-section',
+                        start: 'top 85%',
+                        onEnter: () => {
+                            gsap.to('.stat-item', {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.8,
+                                stagger: 0.12,
+                                ease: 'power3.out'
+                            });
+
+                            document.querySelectorAll('.counter-val').forEach(counter => {
+                                const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+                                const isComma = counter.getAttribute('data-format') === 'comma';
+                                const obj = { val: 0 };
+                                gsap.to(obj, {
+                                    val: target,
+                                    duration: 1.8,
+                                    ease: 'power2.out',
+                                    onUpdate: () => {
+                                        const rounded = Math.floor(obj.val);
+                                        counter.textContent = isComma ? rounded.toLocaleString() : rounded;
+                                    }
+                                });
+                            });
+                        },
+                        once: true
+                    });
+
+                    // --- ABOUT PILLARS STAGGER ---
+                    gsap.to('.pillar-card', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        stagger: 0.16,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '#about-pillars',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                    // --- CAPABILITIES CARDS STAGGER ---
+                    gsap.to('.service-card', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.75,
+                        stagger: 0.12,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '#capabilities-grid',
+                            start: 'top 82%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                    // --- PORTFOLIO ITEM APERTURE REVEAL ---
+                    gsap.to('.portfolio-item', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.9,
+                        stagger: 0.18,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '#portfolio-grid',
+                            start: 'top 82%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                    // --- WORKFLOW CARDS PROGRESSION ---
+                    gsap.to('.workflow-card', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.75,
+                        stagger: 0.14,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '#workflow-grid',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                    // --- TRUST CARDS REVEAL ---
+                    gsap.to('.trust-card', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.75,
+                        stagger: 0.12,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '#trust-grid',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                } else {
+                    // Reduced motion fallback: show everything immediately
+                    gsap.set('.hero-line, .hero-fade, #nle-showcase, .reveal-elem, .pillar-card, .service-card, .portfolio-item, .workflow-card, .trust-card, .stat-item', {
+                        opacity: 1,
+                        y: 0
+                    });
+                    document.querySelectorAll('.counter-val').forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+                        const isComma = counter.getAttribute('data-format') === 'comma';
+                        counter.textContent = isComma ? target.toLocaleString() : target;
+                    });
+                }
+            } else {
+                // Fallback if GSAP is blocked: reveal everything cleanly
+                document.querySelectorAll('.hero-line, .hero-fade, #nle-showcase, .reveal-elem, .pillar-card, .service-card, .portfolio-item, .workflow-card, .trust-card, .stat-item').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
+            }
+
+            // 3. Live Studio Timecode Clock (Simulates 24fps live SMPTE counter)
+            const timecodeEl = document.getElementById('live-timecode');
+            if (timecodeEl && !prefersReducedMotion) {
+                let frames = 18;
+                let seconds = 42;
+                let minutes = 1;
+                setInterval(() => {
+                    frames++;
+                    if (frames >= 24) {
+                        frames = 0;
+                        seconds++;
+                        if (seconds >= 60) {
+                            seconds = 0;
+                            minutes++;
+                        }
+                    }
+                    const pad = (n) => String(n).padStart(2, '0');
+                    timecodeEl.textContent = `00:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
+                }, 1000 / 24);
+            }
+
+            // 4. Simulated Live Waveform VU Meters
+            const barL = document.getElementById('meter-bar-l');
+            const barWarn = document.getElementById('meter-bar-warn');
+            const barPeak = document.getElementById('meter-bar-peak');
+            if (barL && !prefersReducedMotion) {
+                setInterval(() => {
+                    const randL = 60 + Math.random() * 25;
+                    const randWarn = 10 + Math.random() * 12;
+                    const randPeak = Math.random() > 0.7 ? 4 + Math.random() * 8 : 0;
+                    barL.style.width = `${randL}%`;
+                    if (barWarn) barWarn.style.width = `${randWarn}%`;
+                    if (barPeak) barPeak.style.width = `${randPeak}%`;
+                }, 280);
+            }
+
+            // 5. Hero Reel Inline Player Trigger
+            const heroContainer = document.getElementById('hero-player-container');
+            const heroPlaceholder = document.getElementById('hero-player-placeholder');
+            const heroReelId = '13Ao5Nr2mXBVGAFlROuJzsGDuvTR6-ilD';
+
+            if (heroContainer && heroPlaceholder) {
+                heroPlaceholder.addEventListener('click', () => {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://drive.google.com/file/d/${heroReelId}/preview?autoplay=1`;
+                    iframe.className = 'absolute inset-0 w-full h-full border-0 z-20';
+                    iframe.allow = 'autoplay; fullscreen';
+                    iframe.title = 'D&A Media Hub Agency Master Reel';
+                    heroContainer.innerHTML = '';
+                    heroContainer.appendChild(iframe);
+                });
+            }
+
+            // 6. Portfolio Inline Video Stream Trigger
+            const videoWrappers = document.querySelectorAll('.gdrive-video-wrapper');
+            videoWrappers.forEach(wrapper => {
+                const videoId = wrapper.getAttribute('data-video-id');
+                const title = wrapper.getAttribute('data-title') || 'Portfolio Video';
+                const poster = wrapper.querySelector('.video-poster');
+
+                if (poster && videoId) {
+                    poster.addEventListener('click', function loadStream() {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://drive.google.com/file/d/${videoId}/preview?autoplay=1`;
+                        iframe.className = 'absolute inset-0 w-full h-full border-0 z-20';
+                        iframe.allow = 'autoplay; fullscreen';
+                        iframe.title = title;
+                        wrapper.innerHTML = '';
+                        wrapper.appendChild(iframe);
+                    });
+                }
+            });
+
+            // 7. Fullscreen Cinema Lightbox Modal with Animated Transition
+            const modal = document.getElementById('cinema-modal');
+            const modalBox = document.getElementById('cinema-modal-box');
+            const modalSlot = document.getElementById('cinema-iframe-slot');
+            const modalTitle = document.getElementById('cinema-title');
+            const modalClose = document.getElementById('close-cinema-modal');
+            const openModalBtns = document.querySelectorAll('.open-cinema-modal');
+
+            function openCinema(videoId, title) {
+                if (!modal || !modalSlot) return;
+                modalTitle.textContent = title || 'Client Deliverable Stream';
+                modalSlot.innerHTML = '';
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://drive.google.com/file/d/${videoId}/preview?autoplay=1`;
+                iframe.className = 'w-full h-full border-0';
+                iframe.allow = 'autoplay; fullscreen';
+                iframe.title = title || 'Full Cinema Player';
+                modalSlot.appendChild(iframe);
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+
+                setTimeout(() => {
+                    if (modalBox) {
+                        modalBox.classList.remove('scale-95', 'opacity-0');
+                        modalBox.classList.add('scale-100', 'opacity-100');
+                    }
+                }, 20);
+            }
+
+            function closeCinema() {
+                if (!modal || !modalSlot) return;
+                if (modalBox) {
+                    modalBox.classList.remove('scale-100', 'opacity-100');
+                    modalBox.classList.add('scale-95', 'opacity-0');
+                }
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modalSlot.innerHTML = '';
+                    document.body.style.overflow = '';
+                }, 200);
+            }
+
+            openModalBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const vId = btn.getAttribute('data-video-id');
+                    const vTitle = btn.getAttribute('data-title');
+                    if (vId) openCinema(vId, vTitle);
+                });
+            });
+
+            if (modalClose) {
+                modalClose.addEventListener('click', closeCinema);
+            }
+
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeCinema();
+                    }
+                });
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                    closeCinema();
+                }
+            });
+
+            // 8. Portfolio Category Filter Logic with Animation
+            const filterButtons = document.querySelectorAll('.portfolio-filter-btn');
+            const portfolioArticles = document.querySelectorAll('.portfolio-item');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.getAttribute('data-filter');
+
+                    // Button styling
+                    filterButtons.forEach(b => {
+                        b.classList.remove('bg-white', 'text-black', 'shadow-sm');
+                        b.classList.add('text-zinc-400');
+                    });
+                    btn.classList.add('bg-white', 'text-black', 'shadow-sm');
+                    btn.classList.remove('text-zinc-400');
+
+                    // Filter items with fade
+                    portfolioArticles.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            item.style.display = 'block';
+                            if (typeof gsap !== 'undefined') {
+                                gsap.fromTo(item, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+                            }
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    if (typeof ScrollTrigger !== 'undefined') {
+                        ScrollTrigger.refresh();
+                    }
+                });
+            });
+
+            // 9. Mobile Menu Drawer Toggle
+            const mobileBtn = document.getElementById('mobile-toggle');
+            const mobileNav = document.getElementById('mobile-nav');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            if (mobileBtn && mobileNav) {
+                mobileBtn.addEventListener('click', () => {
+                    const isOpen = !mobileNav.classList.contains('hidden');
+                    mobileNav.classList.toggle('hidden');
+                    mobileBtn.setAttribute('aria-expanded', String(!isOpen));
+                    if (!isOpen) {
+                        menuIcon.classList.replace('fa-bars', 'fa-xmark');
+                        if (typeof gsap !== 'undefined') {
+                            gsap.fromTo(mobileLinks, { opacity: 0, x: -12 }, { opacity: 1, x: 0, stagger: 0.06, duration: 0.35, ease: 'power2.out' });
+                        }
+                    } else {
+                        menuIcon.classList.replace('fa-xmark', 'fa-bars');
+                    }
+                });
+
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileNav.classList.add('hidden');
+                        mobileBtn.setAttribute('aria-expanded', 'false');
+                        menuIcon.classList.replace('fa-xmark', 'fa-bars');
+                    });
+                });
+            }
+
+            // 10. Navbar border & glass elevation on scroll
+            const header = document.getElementById('site-header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 30) {
+                        header.classList.add('shadow-xl', 'bg-[#08090D]/95');
+                    } else {
+                        header.classList.remove('shadow-xl', 'bg-[#08090D]/95');
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

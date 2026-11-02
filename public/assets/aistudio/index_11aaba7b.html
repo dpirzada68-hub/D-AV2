@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&A Media Hub | Elite Video Editing Agency</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            400: '#FB7185',
+                            500: '#E11D48', // Rose/Red Accent
+                            600: '#BE123C',
+                        },
+                        dark: {
+                            900: '#06090f', // Deeper black for ultra-premium feel
+                            800: '#0d131f',
+                            700: '#1a2333',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 15px rgba(225, 29, 72, 0.4)' },
+                            '50%': { opacity: .8, boxShadow: '0 0 30px rgba(225, 29, 72, 0.8)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Scroll (Lenis) Base Styles */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* Hide default cursor for custom cursor effect on desktop */
+        @media (min-width: 768px) {
+            body { cursor: none; }
+            a, button, input, textarea { cursor: none; }
+        }
+
+        /* Custom Cursor Elements */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #E11D48;
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(225, 29, 72, 0.5);
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.15s, height 0.15s, border-color 0.15s;
+            transition-timing-function: ease-out;
+        }
+        
+        /* Cursor hover states */
+        .cursor-hover .cursor-dot {
+            width: 0px;
+            height: 0px;
+        }
+        .cursor-hover .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(225, 29, 72, 0.1);
+            border-color: rgba(225, 29, 72, 0.8);
+            backdrop-filter: blur(2px);
+        }
+
+        /* Premium Gradients and Textures */
+        .text-gradient {
+            background: linear-gradient(135deg, #E11D48, #FF6B6B, #FB923C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textShine 4s linear infinite;
+        }
+        @keyframes textShine {
+            to { background-position: 200% center; }
+        }
+        
+        .glass-panel {
+            background: rgba(13, 19, 31, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Smooth reveal animations (Refined & Concise) */
+        .reveal-up, .reveal-left, .reveal-right {
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        
+        .reveal-up {
+            transform: translateY(30px);
+        }
+        
+        .reveal-left {
+            transform: translateX(-30px);
+        }
+        
+        .reveal-right {
+            transform: translateX(30px);
+        }
+
+        .reveal-up.is-visible, .reveal-left.is-visible, .reveal-right.is-visible {
+            opacity: 1;
+            transform: translate(0);
+        }
+        
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+
+        /* Typing cursor blink */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Fancy Form Inputs */
+        .input-field {
+            background: rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(225, 29, 72, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(225, 29, 72, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-300 font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <div class="cursor-dot hidden md:block" id="cursor-dot"></div>
+    <div class="cursor-outline hidden md:block" id="cursor-outline"></div>
+
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center border border-gray-800/50">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center group-hover:bg-brand-500/20 transition duration-300">
+                        <i class="fa-solid fa-play text-brand-500 text-xl group-hover:scale-110 transition duration-300"></i>
+                    </div>
+                    <span class="font-bold text-xl text-white tracking-wider">D&A <span class="text-brand-500">MEDIA</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-400 hover:text-white transition duration-300 font-medium text-sm uppercase tracking-widest hover-target">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition duration-300 font-medium text-sm uppercase tracking-widest hover-target">About</a>
+                    <a href="#services" class="text-gray-400 hover:text-white transition duration-300 font-medium text-sm uppercase tracking-widest hover-target">Services</a>
+                    <a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300 font-medium text-sm uppercase tracking-widest hover-target">Work</a>
+                    <a href="#contact" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)] hover:shadow-[0_0_25px_rgba(225,29,72,0.6)] text-sm uppercase tracking-wide hover-target">
+                        Hire Us
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none text-2xl p-2">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-[95%] left-[2.5%] mt-4 rounded-2xl glass-panel border border-gray-800 overflow-hidden shadow-2xl">
+            <div class="px-4 py-6 space-y-3">
+                <a href="#home" class="mobile-link block px-4 py-3 text-base font-medium text-white hover:bg-brand-500/10 hover:text-brand-400 rounded-xl transition duration-300">Home</a>
+                <a href="#about" class="mobile-link block px-4 py-3 text-base font-medium text-white hover:bg-brand-500/10 hover:text-brand-400 rounded-xl transition duration-300">About</a>
+                <a href="#services" class="mobile-link block px-4 py-3 text-base font-medium text-white hover:bg-brand-500/10 hover:text-brand-400 rounded-xl transition duration-300">Services</a>
+                <a href="#testimonials" class="mobile-link block px-4 py-3 text-base font-medium text-white hover:bg-brand-500/10 hover:text-brand-400 rounded-xl transition duration-300">Work / Testimonials</a>
+                <a href="#contact" class="mobile-link block px-4 py-3 text-base font-bold text-brand-500 bg-brand-500/10 rounded-xl text-center mt-4">Start a Project</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative pt-40 pb-20 lg:pt-56 lg:pb-32 overflow-hidden flex items-center min-h-screen">
+        <!-- Animated Background Orbs for dynamic feel without video overhead -->
+        <div class="absolute top-0 -left-40 w-96 h-96 bg-brand-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob"></div>
+        <div class="absolute top-0 -right-40 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-40 left-20 w-96 h-96 bg-rose-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000"></div>
+
+        <!-- Subtle Grid Overlay -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] [mask-image:linear-gradient(to_bottom,white,transparent)] z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Social Proof Micro-copy (Psychology: Establishes immediate trust) -->
+            <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-gray-700/50 bg-dark-800/40 backdrop-blur-md text-xs font-semibold text-gray-300 reveal-up">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                </span>
+                Based in Pakistan | Serving Creators Globally
+            </div>
+
+            <!-- Dynamic Typography Hook -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight mb-6 reveal-up stagger-1 leading-tight">
+                Crafting Visual <br class="hidden md:block" />
+                <span class="text-gradient typing-cursor" id="typing-text">Masterpieces.</span>
+            </h1>
+
+            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 reveal-up stagger-2 leading-relaxed">
+                Elite, contract-based video editing engineered for retention and impact. We transform raw footage into highly engaging assets that elevate your brand.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-5 reveal-up stagger-3 items-center">
+                <!-- CTA with pulse-glow (Von Restorff Effect) -->
+                <a href="#contact" class="hover-target w-full sm:w-auto animate-pulse-glow bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-bold text-lg transition duration-300 flex items-center justify-center gap-3 group">
+                    Book Discovery Call <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#testimonials" class="hover-target w-full sm:w-auto bg-dark-800 hover:bg-dark-700 border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-full font-bold text-lg transition duration-300 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-play text-brand-500"></i> View Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="relative z-20 border-y border-gray-800/50 bg-dark-900/50 backdrop-blur-xl py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800/50">
+                <div class="reveal-up">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">50+</div>
+                    <div class="text-xs md:text-sm text-brand-500 font-semibold uppercase tracking-wider">Global Clients</div>
+                </div>
+                <div class="reveal-up stagger-1">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">99%</div>
+                    <div class="text-xs md:text-sm text-brand-500 font-semibold uppercase tracking-wider">Client Retention</div>
+                </div>
+                <div class="reveal-up stagger-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">24/7</div>
+                    <div class="text-xs md:text-sm text-brand-500 font-semibold uppercase tracking-wider">Communication</div>
+                </div>
+                <div class="reveal-up stagger-3">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">4K+</div>
+                    <div class="text-xs md:text-sm text-brand-500 font-semibold uppercase tracking-wider">Videos Delivered</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="py-24 bg-dark-800 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-left">
+                    <div class="inline-flex items-center gap-2 text-brand-500 font-bold tracking-widest uppercase text-sm mb-4">
+                        <span class="w-8 h-[2px] bg-brand-500"></span> About The Hub
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">We Don't Just Edit. <br/><span class="text-brand-500">We Retain Attention.</span></h2>
+                    <p class="text-gray-400 mb-8 text-lg leading-relaxed">
+                        Based in the heart of Pakistan, D&A Media Hub provides world-class post-production to global creators and agencies. We operate strictly on a contract basis—meaning when you partner with us, you gain a dedicated in-house team without the overhead.
+                    </p>
+                    <ul class="space-y-6 text-gray-300">
+                        <li class="flex items-start gap-4 p-4 rounded-xl bg-dark-900/50 border border-gray-700/30 hover:border-brand-500/30 transition duration-300">
+                            <div class="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-500 flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block text-lg mb-1">Psychology-Driven Cuts</strong>
+                                <span class="text-sm text-gray-400">Every jump cut, sound effect, and graphic is strategically placed to trigger dopamine and maximize viewer retention.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 rounded-xl bg-dark-900/50 border border-gray-700/30 hover:border-brand-500/30 transition duration-300">
+                            <div class="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-500 flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-file-signature"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block text-lg mb-1">Secure Retainer Contracts</strong>
+                                <span class="text-sm text-gray-400">We don't do one-offs. We build long-term, scalable partnerships with transparent monthly deliverables.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative reveal-right stagger-1">
+                    <div class="aspect-[4/5] md:aspect-square lg:aspect-[4/5] bg-dark-900 rounded-3xl border border-gray-700 shadow-2xl overflow-hidden relative group">
+                        <!-- High-end placeholder image -->
+                        <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Video Editing Setup" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition duration-700 ease-in-out">
+                        
+                        <!-- Overlay gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent"></div>
+                        
+                        <div class="absolute bottom-8 left-8 right-8 p-6 glass-panel rounded-2xl transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-white font-bold text-lg">Premium Toolset</h4>
+                                    <p class="text-sm text-brand-400">Premiere Pro, After Effects, DaVinci</p>
+                                </div>
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-dark-900 text-xl font-bold shadow-lg">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-500 rounded-full mix-blend-screen filter blur-[50px] opacity-40 z-[-1]"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-dark-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal-up">
+                <div class="inline-flex items-center gap-2 text-brand-500 font-bold tracking-widest uppercase text-sm mb-4">
+                    <span class="w-8 h-[2px] bg-brand-500"></span> Capabilities
+                </div>
+                <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">Our Editing <span class="text-gradient">Arsenal</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Service Cards with complex hover states -->
+                <div class="bg-dark-800 p-8 rounded-3xl border border-gray-800 hover:border-brand-500/50 hover:bg-dark-800/80 transition-all duration-500 group reveal-up hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(225,29,72,0.15)] hover-target">
+                    <div class="w-16 h-16 bg-gradient-to-br from-dark-700 to-dark-900 rounded-2xl flex items-center justify-center text-brand-500 text-3xl mb-8 border border-gray-700 shadow-inner group-hover:text-white group-hover:bg-brand-500 transition-all duration-500">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-400 transition duration-300">YouTube Content</h4>
+                    <p class="text-gray-400 leading-relaxed">High-retention editing, jump cuts, B-roll integration, and sound design meticulously tailored to dominate the YouTube algorithm.</p>
+                </div>
+
+                <div class="bg-dark-800 p-8 rounded-3xl border border-gray-800 hover:border-brand-500/50 hover:bg-dark-800/80 transition-all duration-500 group reveal-up stagger-1 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(225,29,72,0.15)] hover-target">
+                    <div class="w-16 h-16 bg-gradient-to-br from-dark-700 to-dark-900 rounded-2xl flex items-center justify-center text-brand-500 text-3xl mb-8 border border-gray-700 shadow-inner group-hover:text-white group-hover:bg-brand-500 transition-all duration-500">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-400 transition duration-300">Commercials</h4>
+                    <p class="text-gray-400 leading-relaxed">Cinematic color grading (DaVinci Resolve), dynamic transitions, and impactful storytelling designed to convert viewers into buyers.</p>
+                </div>
+
+                <div class="bg-dark-800 p-8 rounded-3xl border border-gray-800 hover:border-brand-500/50 hover:bg-dark-800/80 transition-all duration-500 group reveal-up stagger-2 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(225,29,72,0.15)] hover-target">
+                    <div class="w-16 h-16 bg-gradient-to-br from-dark-700 to-dark-900 rounded-2xl flex items-center justify-center text-brand-500 text-3xl mb-8 border border-gray-700 shadow-inner group-hover:text-white group-hover:bg-brand-500 transition-all duration-500">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-400 transition duration-300">Short-Form Virality</h4>
+                    <p class="text-gray-400 leading-relaxed">Fast-paced, highly engaging TikToks, IG Reels, and YT Shorts utilizing dynamic captions (Hormozi style) and trending visual hooks.</p>
+                </div>
+
+                <div class="bg-dark-800 p-8 rounded-3xl border border-gray-800 hover:border-brand-500/50 hover:bg-dark-800/80 transition-all duration-500 group reveal-up hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(225,29,72,0.15)] hover-target">
+                    <div class="w-16 h-16 bg-gradient-to-br from-dark-700 to-dark-900 rounded-2xl flex items-center justify-center text-brand-500 text-3xl mb-8 border border-gray-700 shadow-inner group-hover:text-white group-hover:bg-brand-500 transition-all duration-500">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-400 transition duration-300">VFX & Motion</h4>
+                    <p class="text-gray-400 leading-relaxed">Custom 2D/3D animations, clean lower thirds, advanced rotoscoping, and visual effects that give your content a studio-tier finish.</p>
+                </div>
+
+                <div class="bg-dark-800 p-8 rounded-3xl border border-gray-800 hover:border-brand-500/50 hover:bg-dark-800/80 transition-all duration-500 group reveal-up stagger-1 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(225,29,72,0.15)] hover-target">
+                    <div class="w-16 h-16 bg-gradient-to-br from-dark-700 to-dark-900 rounded-2xl flex items-center justify-center text-brand-500 text-3xl mb-8 border border-gray-700 shadow-inner group-hover:text-white group-hover:bg-brand-500 transition-all duration-500">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-400 transition duration-300">Immersive Audio</h4>
+                    <p class="text-gray-400 leading-relaxed">Studio-grade noise reduction, voice EQ, spatial mixing, and dense sound effect layering that viewers can *feel*.</p>
+                </div>
+
+                <div class="bg-dark-800 p-8 rounded-3xl border border-gray-800 hover:border-brand-500/50 hover:bg-dark-800/80 transition-all duration-500 group reveal-up stagger-2 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(225,29,72,0.15)] hover-target">
+                    <div class="w-16 h-16 bg-gradient-to-br from-dark-700 to-dark-900 rounded-2xl flex items-center justify-center text-brand-500 text-3xl mb-8 border border-gray-700 shadow-inner group-hover:text-white group-hover:bg-brand-500 transition-all duration-500">
+                        <i class="fa-solid fa-podcast"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-400 transition duration-300">Podcast Multi-cam</h4>
+                    <p class="text-gray-400 leading-relaxed">Seamlessly switched multi-camera podcast editing, color-matching, and creation of micro-clips for social promotion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-dark-800 border-t border-b border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-up">
+                <div class="inline-flex items-center gap-2 text-brand-500 font-bold tracking-widest uppercase text-sm mb-4">
+                    <span class="w-8 h-[2px] bg-brand-500"></span> The Proof
+                </div>
+                <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Watch Our <span class="text-gradient">Impact</span></h3>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Don't just take our word for it. Hit play and see the quality of work we deliver to our retainer clients daily.</p>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Video Item 1 -->
+                <div class="bg-dark-900 rounded-3xl overflow-hidden border border-gray-700 hover:border-brand-500/50 shadow-2xl transition duration-500 hover:-translate-y-1 reveal-up">
+                    <div class="aspect-video w-full bg-black relative gdrive-container group cursor-pointer" 
+                         data-gdrive-link="https://drive.google.com/file/d/13Ao5Nr2mXBVGAFlROuJzsGDuvTR6-ilD/view?usp=drivesdk">
+                         <!-- Fallback state -->
+                         <div class="absolute inset-0 flex items-center justify-center text-gray-500 flex-col gap-3 bg-dark-800">
+                             <div class="w-16 h-16 rounded-full bg-brand-500/20 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                                 <i class="fa-solid fa-play text-brand-500 text-xl ml-1"></i>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex text-brand-500 text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 leading-tight">"They 10x'd my channel retention."</h4>
+                        <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">- Tech & Finance Creator</p>
+                    </div>
+                </div>
+
+                <!-- Video Item 2 -->
+                <div class="bg-dark-900 rounded-3xl overflow-hidden border border-gray-700 hover:border-brand-500/50 shadow-2xl transition duration-500 hover:-translate-y-1 reveal-up stagger-1">
+                    <div class="aspect-video w-full bg-black relative gdrive-container group cursor-pointer" 
+                         data-gdrive-link="https://drive.google.com/file/d/1By-_YiZG5P6UNaZ8q4nBOkeA0cP-U5Q0/view?usp=drivesdk">
+                         <div class="absolute inset-0 flex items-center justify-center text-gray-500 flex-col gap-3 bg-dark-800">
+                             <div class="w-16 h-16 rounded-full bg-brand-500/20 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                                 <i class="fa-solid fa-play text-brand-500 text-xl ml-1"></i>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex text-brand-500 text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 leading-tight">"Cinematic quality, every single time."</h4>
+                        <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">- Lifestyle Brand</p>
+                    </div>
+                </div>
+
+                <!-- Video Item 3 -->
+                <div class="bg-dark-900 rounded-3xl overflow-hidden border border-gray-700 hover:border-brand-500/50 shadow-2xl transition duration-500 hover:-translate-y-1 reveal-up">
+                    <div class="aspect-video w-full bg-black relative gdrive-container group cursor-pointer" 
+                         data-gdrive-link="https://drive.google.com/file/d/17dwiznk1JgBdT7rlkjITRo_OVmO7jwq2/view?usp=drivesdk">
+                         <div class="absolute inset-0 flex items-center justify-center text-gray-500 flex-col gap-3 bg-dark-800">
+                             <div class="w-16 h-16 rounded-full bg-brand-500/20 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                                 <i class="fa-solid fa-play text-brand-500 text-xl ml-1"></i>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex text-brand-500 text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 leading-tight">"The most reliable contract agency."</h4>
+                        <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">- E-commerce Agency</p>
+                    </div>
+                </div>
+
+                <!-- Video Item 4 -->
+                <div class="bg-dark-900 rounded-3xl overflow-hidden border border-gray-700 hover:border-brand-500/50 shadow-2xl transition duration-500 hover:-translate-y-1 reveal-up stagger-1">
+                    <div class="aspect-video w-full bg-black relative gdrive-container group cursor-pointer" 
+                         data-gdrive-link="https://drive.google.com/file/d/1yp-M0NYFGALC9QHdqv9bsd5gbAeuMAP9/view?usp=drivesdk">
+                         <div class="absolute inset-0 flex items-center justify-center text-gray-500 flex-col gap-3 bg-dark-800">
+                             <div class="w-16 h-16 rounded-full bg-brand-500/20 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                                 <i class="fa-solid fa-play text-brand-500 text-xl ml-1"></i>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex text-brand-500 text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 leading-tight">"Visually stunning and highly engaging."</h4>
+                        <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">- Entertainment Channel</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-dark-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-dark-800 rounded-[2.5rem] p-8 md:p-14 lg:p-20 border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                <!-- Decorative BG -->
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500 rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600 rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+                    
+                    <!-- Contact Info -->
+                    <div class="reveal-up">
+                        <!-- Psychological Trick: Scarcity/Urgency -->
+                        <div class="inline-flex items-center gap-3 bg-red-500/10 border border-red-500/20 px-4 py-2 rounded-full mb-8">
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                            </span>
+                            <span class="text-red-400 font-semibold text-sm">High Demand: Only 2 contract spots left this month.</span>
+                        </div>
+
+                        <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Ready to <br/><span class="text-brand-500">Scale?</span></h2>
+                        <p class="text-gray-400 mb-10 text-lg leading-relaxed">
+                            Stop worrying about editor churn and missed deadlines. Partner with a professional media house. Fill out the application and our lead producer will contact you within 24 hours.
+                        </p>
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-6 group hover-target">
+                                <div class="w-14 h-14 bg-dark-900 border border-gray-700 group-hover:border-brand-500 rounded-2xl flex items-center justify-center text-brand-500 text-xl transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(225,29,72,0.3)]">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-1">Direct Email</h5>
+                                    <p class="text-white font-medium text-lg">dpirzada37@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-6 group hover-target">
+                                <div class="w-14 h-14 bg-dark-900 border border-gray-700 group-hover:border-brand-500 rounded-2xl flex items-center justify-center text-brand-500 text-xl transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(225,29,72,0.3)]">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-1">WhatsApp</h5>
+                                    <p class="text-white font-medium text-lg">03063984702</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Form Linked to Google Forms -->
+                    <div class="bg-dark-900/80 backdrop-blur-md p-8 lg:p-10 rounded-3xl border border-gray-700/50 reveal-up stagger-1 relative shadow-xl w-full">
+                        <h3 class="text-2xl font-bold text-white mb-6">Start Your Project</h3>
+                        
+                        <!-- Hidden iframe to prevent page redirect on submit -->
+                        <script type="text/javascript">var submitted=false;</script>
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { document.getElementById('success-message').classList.remove('hidden'); document.getElementById('custom-gform').classList.add('hidden'); }"></iframe>
+                        
+                        <!-- Updated action link specifically for your form -->
+                        <form id="custom-gform" action="https://docs.google.com/forms/d/e/1FAIpQLScW-O3HRfpmh_qizc0coeFHONbIpCfq3hd3oBFzPlrRnDt5Mg/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-5">
+                            
+                            <!-- Field 1: Name / Brand -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Your name / Brand <span class="text-brand-500">*</span></label>
+                                <input type="text" name="entry.1264569155" required class="w-full bg-dark-800 border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition duration-300 placeholder-gray-600" placeholder="e.g. John Doe / TechBrand">
+                            </div>
+
+                            <!-- Field 2: Email -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Email address <span class="text-brand-500">*</span></label>
+                                <input type="email" name="entry.1106146705" required class="w-full bg-dark-800 border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition duration-300 placeholder-gray-600" placeholder="hello@example.com">
+                            </div>
+
+                            <!-- Field 3: Message / Project Details -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Project Details / Message</label>
+                                <textarea name="entry.1442646721" rows="3" class="w-full bg-dark-800 border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition duration-300 placeholder-gray-600 resize-none" placeholder="Tell us about your project or requirements..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition duration-300 flex items-center justify-center gap-3 mt-4 hover:shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:-translate-y-1">
+                                Submit Application <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+
+                        <!-- Success Message (Shows automatically when submitted) -->
+                        <div id="success-message" class="hidden flex flex-col items-center justify-center py-12 text-center">
+                            <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-4xl mb-6">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <h4 class="text-3xl font-bold text-white mb-3">Request Sent!</h4>
+                            <p class="text-gray-400 text-lg">Our lead producer will contact you within 24 hours.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black pt-20 pb-10 border-t border-gray-900 relative overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-3xl h-64 bg-brand-500 rounded-t-full mix-blend-screen filter blur-[150px] opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col items-center gap-6 mb-12 text-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-play text-brand-500 text-2xl"></i>
+                    <span class="font-black text-3xl text-white tracking-widest">D&A <span class="text-brand-500">MEDIA</span></span>
+                </div>
+                <p class="text-gray-500 text-sm max-w-md">Premium contract-based video editing for creators and brands worldwide.</p>
+            </div>
+            
+            <div class="border-t border-gray-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-semibold tracking-wider uppercase text-gray-600">
+                <div>&copy; 2026 D&A Media Hub. All rights reserved.</div>
+                <div>Engineered for Excellence</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lenis Smooth Scroll Library -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // --- Smooth Scroll (Lenis) Initialization ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like smooth scroll
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        })
+
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        
+        // Only run cursor logic if on non-touch device
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                // Slight delay for outline for premium feel
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            // Hover effects on buttons and links
+            const hoverTargets = document.querySelectorAll('a, button, .hover-target, input, textarea');
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => {
+                    document.body.classList.add('cursor-hover');
+                });
+                target.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('cursor-hover');
+                });
+            });
+        }
+
+        // --- Typing Effect Logic ---
+        const words = ["Masterpieces.", "Experiences.", "Retention.", "Virality."];
+        let i = 0;
+        let timer;
+        const typingText = document.getElementById('typing-text');
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    typingText.innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    typingText.innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+        
+        // Start typing effect on load
+        setTimeout(typingEffect, 1000);
+
+
+        // --- Navigation Logic ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+
+        // --- Scroll Reveal Animations (Intersection Observer) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -10% 0px', /* Trigger slightly earlier for a snappier feel */
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Stop observing once animated
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Select all reveal types
+        document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(element => {
+            observer.observe(element);
+        });
+
+
+        // --- Google Drive Video Embed Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const containers = document.querySelectorAll('.gdrive-container');
+            
+            containers.forEach(container => {
+                const driveLink = container.getAttribute('data-gdrive-link');
+                
+                // Add click listener to load video only when requested (Performance optimization)
+                container.addEventListener('click', function loadIframe() {
+                    if (driveLink && !container.querySelector('iframe')) {
+                        const match = driveLink.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                        
+                        if (match && match[1]) {
+                            const videoId = match[1];
+                            const embedUrl = `https://drive.google.com/file/d/${videoId}/preview?autoplay=1`;
+                            
+                            const iframe = document.createElement('iframe');
+                            iframe.src = embedUrl;
+                            iframe.className = "absolute top-0 left-0 w-full h-full border-0 z-10 rounded-3xl";
+                            iframe.allow = "autoplay; fullscreen";
+                            
+                            container.appendChild(iframe);
+                        }
+                    }
+                    // Remove click listener after loading
+                    container.removeEventListener('click', loadIframe);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
